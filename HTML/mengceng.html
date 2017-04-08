@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+  <title>mengceng</title>
+  <style>
+    *{
+      margin : 0;
+      padding: 0;
+    }
+    #meng{
+      display:block;
+      background-color:#000;
+      opacity:0.5;
+      position:fixed;
+      top:0px;
+      left:0px;
+      width:100%;
+      height:100%;
+
+    }
+    #tanchu{
+      display:block;
+      position:absolute;
+      background-color:white;
+      z-index:500;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <p>hahahaha</p>
+    <button id="btn">click me</button>
+  </div>
+</body>
+<script>
+  var btn = document.getElementById('btn')
+  btn.addEventListener('click',function(){
+    mengceng()
+  },false)
+  function mengceng(){
+    var oDiv = document.createElement('div')
+    oDiv.setAttribute('id',"meng")
+    document.body.append(oDiv)
+    var iDiv = document.createElement('div')
+    iDiv.setAttribute('id','tanchu')
+    iDiv.style.width ="300px"
+    iDiv.style.height="300px"
+    var width  = parseInt(iDiv.style.width)
+    var height = parseInt(iDiv.style.height)
+    iDiv.style.left = (document.body.clientWidth-width)/2+document.body.scrollLeft+'px'
+    iDiv.style.top =(document.body.clientHeight-height)/2 +document.body.scrollTop+'px'
+    oDiv.append(iDiv)
+  }
+</script>
+</html>

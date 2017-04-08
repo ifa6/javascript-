@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <title>test</title>
+  <style>
+  .div1{
+    width:200px;
+    height:300px;
+    background:blue;
+    overflow:auto;
+  }
+  .div2{
+    width:100px;
+    height:100px;
+    background:red;
+    margin:20px;
+    float:left;
+  }
+  .div3{
+    width:100px;
+    height:100px;
+    background:yellow;
+    margin:20px;
+    float:left;
+  }
+  p{
+    white-space:pre;
+  }
+  </style>
+  </head>
+  <body>
+  <div class="div1">
+    <div class="div2"></div>
+    <div class="div3"></div>
+  </div>
+    <img id="img_1" src="http://e.hiphotos.baidu.com/image/pic/item/314e251f95cad1c8037ed8c97b3e6709c83d5112.jpg">
+    <p>                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor inaaaaa reprehenderit inbbbbbbbbb voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </body>
+</html>
+<script>
+  /*function allowDrop(ev){
+    ev.preventDefault()
+  }
+  function drag(ev){
+    ev.dataTransfer.setData("Text",ev.target.id)
+  }
+  function drop(ev){
+    ev.preventDefault()
+    var data = ev.dataTransfer.getData("Text")
+    alert(data)
+    ev.target.appendChild(document.getElementById(data))
+  }
+  //alert('haha')
+  var img = document.querySelector('#img_1')
+  /*var drag1 = document.querySelector('#drag')
+  img.addEventListener('dragstart',drag,false)
+  drag1.addEventListener('drop',drop,false)
+  drag1.addEventListener('dragover',allowDrop,false)
+  var drop1 = document.querySelector('#drop')
+  drop1.addEventListener('drop',drop,false)
+  drop1.addEventListener('dragover',allowDrop,false)
+  function EventTarget(){
+    this.handlers={}
+  }
+  EventTarget.prototype={
+    constructor:EventTarget,
+    addHandler:function(type,handler){
+      if(typeof this.handlers[type]=='undefined'){
+        this.handlers[type]=[]
+      }
+      this.handlers[type].push(handler)
+    },
+    fire:function(event){
+      if(!event.target){
+        event.target=this
+      }
+      if(this.handlers[event.type] instanceof Array){
+        var handlers = this.handlers[event.type]
+        for(var i=0,len = handlers.length;i<len;i++){
+          handlers[i](event)
+        }
+      }
+    },
+    removehandler:function(type,handler){
+      if(this.handlers[type] instanceof Array){
+        var handlers = this.handlers[type]
+        for(var i =0,len=handlers.length;i<len;i++){
+          if(handlers[i]==handler){
+            break;
+          }
+        }
+        handlers.splice(i,1)
+      }
+    }
+  }
+  var eventobj = new EventTarget()
+  var handler=function(){
+    alert('event')
+  }
+  eventobj.addHandler('alert',handler)
+  eventobj.fire({type:'alert'})
+  document.cookie="name=wang"
+  document.cookie="fav=li"
+  var cook = document.cookie*/
+  setTimeout(function(){
+    alert(1)
+  },0)
+  setTimeout(function(){
+    alert(2)
+  },5000)
+
+</script>

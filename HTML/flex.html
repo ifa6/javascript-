@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+  <title>flex</title>
+  <style>
+  	*{
+		margin:0;
+		padding: 0;
+  	}
+  	#container{
+  		border:black 1px solid;
+  		display: flex;
+  		justify-content:space-around;
+  		height:300px;
+  		flex-wrap:wrap;
+  	}
+  	.inner{
+		width:200px;
+		flex-shrink:2;
+  	}
+  	.color1{
+  		order:3;
+  		background-color: blue;
+		
+  	}
+  	.color2{
+  		order:1;
+  		background-color: red;
+		
+  	}
+  	.color3{
+  		order: 2;
+  		background-color: yellow;
+		
+  	}
+  </style>
+</head>
+<body>
+  <div id="container">
+  	<div class="inner color1"></div>
+  	<div class="inner color2"></div>
+  	<div class="inner color3"></div>
+  </div>
+  <input type="button" value="关闭公告" onclick="closeGG()" id="btnClose" />
+<div id="dvGG" style="display:none">公告。。。。</div>
+<script>
+    var isClosed = /(^|;| )ggclose=1/.test(document.cookie);
+    if (isClosed) document.getElementById('btnClose').style.display = 'none';
+    else document.getElementById('dvGG').style.display = 'block';
+         
+    function closeGG() {
+        if (confirm('确认关闭？！')) {
+            document.getElementById('dvGG').style.display = 'none';
+            document.getElementById('btnClose').style.display = 'none';
+            ///设置cookie，有效期1年
+            var d = new Date();
+            d.setFullYear(d.getFullYear() + 1);
+            document.cookie = 'ggclose=1;expires=' + d.toGMTString();
+        }
+    }
+</script>
+</body>
+</html>

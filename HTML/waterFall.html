@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>瀑布流布局测试</title>
+</head>
+
+<body>
+    <div class="container"></div>
+    <script>
+        var waterFall = {
+            container: document.getElementById("container"),
+            columnNumber: 1,
+            columnWidth: 210,
+            rootImage: "http://cued.xunlei.com/demos/publ/img/",
+            indexImage: 0,
+            scrollTop:document.documentElement.scrollTop||document.body.scrollTop,
+            detectLeft:0,
+            loadFinish:false,
+            getIndex:function(){
+                var index = this.indexImage
+                if(index<10){
+                    index = "00"+index
+                }else if(index<100){
+                    index = "0"+index
+                }
+                return index 
+            },
+            appendDetect:function(){
+                var start=0
+                for(start;start<this.columnNumber;start++){
+                    var eleColumn = document.getElementById("waterFallColumn_"+start)
+                    if(eleColumn&&!this.loadFinish){
+                        if(eleColumn.offsetTop+eleColumn.clientHeight<this.scrollTop + (window.innerHeight))
+                            this.append(eleColumn)
+                    }
+                }
+                return this
+            },
+            append:function(column){
+                this.indexImage+=1
+                var html="",
+                    index=this.getIndex(),
+                    imgUrl = this.rootImage+"P_"+index+".jpg"
+                var aEle = document.createElement("a")
+                aEle.href="###"
+                aEle.className="pic_a"
+                aEle.innerHTML='<img src="'+imgUrl+'"/><strong>'+index+'</strong'
+                column.appendChild(aEle)
+                if(index >=160){
+                    this.loadFinish=true
+                }
+                return this
+            },
+            create:function(){
+                this.columnNumber = Math.floor(document.body.clientWidth/this.columnWidth)
+                var start =0,
+                htmlColum='',
+                self=this,
+                for(start;start<this.columnNumber;start+=1){
+                    htmlColum =htmlColum+'<span id="waterFallColumn_'+start+'"class="column" style="width:'+this.columenWidth+'px;">'+
+                    function(){
+                        var html='',
+                        i=0 
+                        for(i=0;i<5;i+=1){
+                            self.indexImage=start+self.columnNumber*i
+                            var index=self.getIndex()
+                            html =html+'<a href="###" class="pic_a"><img src="'+self.rootImage+"P_"+index+'.jpg"/><strong>'+index+'</strong></a>'
+
+                        }
+                        return html
+                    }() +'</span>'
+                }
+                //htmlColum+='<span id="waterFallDetect" class="column" style="width:'+this.columnWidth +'px;"></span>'
+                this.container.innerHTML =htmlColum
+                this.detectLeft=document.getElementById("waterFallDetect").offsetLeft
+                return this
+            },
+            scroll:function(){
+                var self =this
+                window.onscroll=function(){
+                    var scrollTop=document.documentElement.scrollTop||document.body.scrollTop
+                    if(!this.loadFinish&&Math.abs(scrollTop-self.scrollTop)>100){
+                        self.scrollTop = scrollTop
+                        self.appendDetect()
+                    }
+                }
+                return this
+            }
+
+
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    * {
+        marigin: 0px;
+        padding: 0px;
+    }
+    
+    #box {
+        margin-top: 100px;
+        border: 1px red solid;
+    }
+    </style>
+    <title>todo</title>
+</head>
+
+<body>
+    <div id="contain">
+        <input type="text" id="add">
+        <ul id="promptBox">
+        </ul>
+        <div id="box">
+        </div>
+    </div>
+    <script>
+    var lists = []
+    var listshad = []
+    var add = document.getElementById("add")
+    var box = document.getElementById("box")
+    var contain = document.getElementById('contain')
+    add.addEventListener('keyup', function(event) {
+        if (event.keyCode == 13) {
+            var value = add.value.trim()
+            if (value != '') {
+                lists.push(value)
+                create()
+
+            }
+            add.value = ""
+        } else {
+            var value = add.value.trim()
+            searchPrompt(value)
+            listshad = []
+        }
+    }, false)
+
+    function searchPrompt(val) {
+        var promptBox = document.getElementById('promptBox')
+        var docfrag = document.createDocumentFragment()
+        promptBox.innerHTML = ""
+        if (val !== '') {
+            lists.forEach(function(value, index) {
+                if (value.indexOf(val) === 0) {
+                    listshad.push(value)
+                }
+            })
+            listshad.sort()
+            listshad.forEach(function(value, index) {
+                var li = document.createElement("li")
+                li.textContent = value
+                docfrag.appendChild(li)
+            })
+            promptBox.appendChild(docfrag)
+        }
+
+
+    }
+
+    function create() {
+        var index = lists.length - 1
+        var value = lists[index]
+        var newDiv = document.createElement("div")
+        var newSpan = document.createElement("span")
+        var newBtn = document.createElement('button')
+        newSpan.setAttribute('class', 'list')
+        newBtn.setAttribute('class', 'remove')
+        newSpan.innerHTML = value
+        newBtn.innerHTML = "remove"
+        newDiv.appendChild(newSpan)
+        newDiv.appendChild(newBtn)
+        box.appendChild(newDiv)
+    }
+    box.onclick = function(event) {
+
+        if (event.target.className == "remove") {
+            var btn = event.target
+            var index = getIndex(box, btn.parentNode)
+            lists.splice(index, 1)
+            var curNode = box.getElementsByTagName("div")[index]
+            box.removeChild(curNode)
+        }
+    }
+
+    function getIndex(parent, child) {
+        var list = parent.getElementsByTagName('div')
+        for (var i = 0, length = list.length; i < length; i++) {
+            if (list[i] == child)
+                return i;
+        }
+    }
+    </script>
+</body>
+
+</html>
