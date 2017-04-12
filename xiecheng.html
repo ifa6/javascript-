@@ -1,0 +1,57 @@
+<!--
+这是携程web前端暑假实习生笔试题的附加题
+一共有三问
+1.实现button按照value的大小，倒序排列
+2.实现Countdown函数，使得点击每个button，数值每隔一秒减少一，直到0停止。
+3.用事件委托 来优化 button的click事件
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Button</title>
+</head>
+<body>
+	<div id="buttonList">
+		<input type="button" value=10>
+		<input type="button" value=80>
+		<input type="button" value=60>
+		<input type="button" value=20>
+		<input type="button" value=100>
+		<input type="button" value=50>
+	</div>
+</body>
+<script>
+	var btns = document.getElementsByTagName('input')
+	var btnList = document.getElementById('buttonList')
+	var btnArr = Array.prototype.slice.call(btns)
+	btnArr=btnArr.sort(function(a,b){
+		if(parseInt(a.value)>parseInt(b.value)){
+			return 0
+		}else{
+			return 1
+		}
+	})
+	for(var i=0;i<btnArr.length;i++){
+		btnList.appendChild(btnArr[i])
+	}
+	btnList.addEventListener('click',function(event){
+		if(event.target.type == "button"){
+			Countdown(event.target)
+		}
+	},false)
+	var Countdown= (function(){
+			var timer
+			return function(target){
+				clearInterval(timer)
+				timer = setInterval(function(){
+					if(parseInt(target.value)==0)
+						clearInterval(timer)
+					else
+						target.value = parseInt(target.value)-1
+				},1000)
+		}
+	})()		
+</script>
+</html>
